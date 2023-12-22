@@ -11,6 +11,7 @@ export const getNotes: RequestHandler = async (req, res, next) => {
   }
 };
 
+// Singular note by Id
 export const getNote: RequestHandler = async (req, res, next) => {
   const noteId = req.params.noteId;
 
@@ -22,6 +23,7 @@ export const getNote: RequestHandler = async (req, res, next) => {
   }
 };
 
+// Create a note
 export const createNote: RequestHandler = async (req, res, next) => {
   const title = req.body.title;
   const text = req.body.text;
