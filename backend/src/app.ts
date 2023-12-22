@@ -4,6 +4,8 @@ import notesRoutes from "./routes/notes";
 
 const app = express();
 
+app.use(express.json());
+
 // Middleware that catches requests to endpoints, checks notesRoutes, look which fits
 app.use("/api/notes", notesRoutes);
 
