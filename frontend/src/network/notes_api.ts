@@ -33,4 +33,5 @@ export async function createNote(note: NoteInput): Promise<Note> {
     },
     body: JSON.stringify(note),
   });
+  return response.json();
 }
