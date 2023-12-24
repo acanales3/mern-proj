@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Note as NoteModel } from "./models/note";
 import Note from "./components/Note";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import styles from "./styles/NotesPage.module.css";
+import styleUtils from "./styles/utils.module.css";
 import * as NotesApi from "./network/notes_api";
+import AddNoteDialog from "./components/AddNoteDialog";
 
 function App() {
   const [notes, setNotes] = useState<NoteModel[]>([]);
+  const [showAddNoteDialog, setShowAddNoteDialog] = useState(false);
 
   useEffect(() => {
     async function loadNotes() {
@@ -24,6 +27,14 @@ function App() {
 
   return (
     <Container>
+      <Button
+        className={`mb-4 ${styleUtils.blockCenter}`}
+        onClick={() => {
+          setShowAddNoteDialog(true);
+        }}
+      >
+        Add New Note
+      </Button>
       <Row xs={1} md={2} xl={3} className="g-4">
         {notes.map((note) => (
           <Col key={note._id}>
@@ -31,7 +42,19 @@ function App() {
           </Col>
         ))}
       </Row>
+      {showAddNoteDialog && (
+        <AddNoteDialog
+          onDismiss={() => {
+            setShowAddNoteDialog(false);
+          }}
+          onNoteSaved={(newNote) => {
+            setNotes([...notes, newNote]);
+            setShowAddNoteDialog(false);
+          }}
+        />
+      )}
     </Container>
+    //showAddNoteDialog && needed so at each opening time it is wiped and previous input is not still loaded on the screen
   );
 }
 
