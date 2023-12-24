@@ -91,7 +91,7 @@ function App() {
         />
       )}
     </Container>
-    //showAddNoteDialog && needed so at each opening time it is wiped and previous input is not still loaded on the screen
+    //showAddEditNoteDialog && needed so at each opening time it is wiped and previous input is not still loaded on the screen
   );
 }
 
