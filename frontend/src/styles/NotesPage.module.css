@@ -4,6 +4,10 @@
   align-items: center;
 }
 
+.notesGrid {
+  width: 100%;
+}
+
 .note {
   height: 200px;
   min-width: 150px;
