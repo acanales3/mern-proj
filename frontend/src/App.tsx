@@ -7,6 +7,8 @@ import styleUtils from "./styles/utils.module.css";
 import * as NotesApi from "./network/notes_api";
 import AddEditNoteDialog from "./components/AddEditNoteDialog";
 import { FaPlus } from "react-icons/fa";
+import SignUpModal from "./components/SignUpModal";
+import LogInModal from "./components/LogInModal";
 
 function App() {
   const [notes, setNotes] = useState<NoteModel[]>([]);
@@ -108,6 +110,12 @@ function App() {
             setNoteToEdit(null);
           }}
         />
+      )}
+      {false && (
+        <SignUpModal onDismiss={() => {}} onSignUpSuccessful={() => {}} />
+      )}
+      {false && (
+        <LogInModal onDismiss={() => {}} onLogInSuccessful={() => {}} />
       )}
     </Container>
     //showAddEditNoteDialog && needed so at each opening time it is wiped and previous input is not still loaded on the screen
