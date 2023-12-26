@@ -9,6 +9,7 @@ import AddEditNoteDialog from "./components/AddEditNoteDialog";
 import { FaPlus } from "react-icons/fa";
 import SignUpModal from "./components/SignUpModal";
 import LogInModal from "./components/LogInModal";
+import NavBar from "./components/NavBar";
 
 function App() {
   const [notes, setNotes] = useState<NoteModel[]>([]);
@@ -63,62 +64,73 @@ function App() {
   );
 
   return (
-    <Container className={styles.notesPage}>
-      <Button
-        className={`mb-4 ${styleUtils.blockCenter} ${styleUtils.flexCenter}`}
-        onClick={() => {
-          setShowAddNoteDialog(true);
-        }}
-      >
-        Add New Note
-        <FaPlus />
-      </Button>
-      {notesLoading && <Spinner animation="border" variant="primary" />}
-      {notesLoadingError && (
-        <p>Something went wrong. Please refresh the page.</p>
-      )}
-      {!notesLoading && !notesLoadingError && (
-        <>
-          {notes.length > 0 ? notesGrid : <p>You do not have any notes yet</p>}
-        </>
-      )}
-      {showAddNoteDialog && (
-        <AddEditNoteDialog
-          onDismiss={() => {
-            setShowAddNoteDialog(false);
+    <div>
+      <NavBar
+        loggedInUser={null}
+        onLogInClicked={() => {}}
+        onSignUpClicked={() => {}}
+        onLogOutSuccessful={() => {}}
+      />
+      <Container className={styles.notesPage}>
+        <Button
+          className={`mb-4 ${styleUtils.blockCenter} ${styleUtils.flexCenter}`}
+          onClick={() => {
+            setShowAddNoteDialog(true);
           }}
-          onNoteSaved={(newNote) => {
-            setNotes([...notes, newNote]);
-            setShowAddNoteDialog(false);
-          }}
-        />
-      )}
-      {noteToEdit && (
-        <AddEditNoteDialog
-          noteToEdit={noteToEdit}
-          onDismiss={() => {
-            setNoteToEdit(null);
-          }}
-          onNoteSaved={(updatedNote) => {
-            setNotes(
-              notes.map((existingNote) =>
-                existingNote._id === updatedNote._id
-                  ? updatedNote
-                  : existingNote
-              )
-            );
-            setNoteToEdit(null);
-          }}
-        />
-      )}
-      {false && (
-        <SignUpModal onDismiss={() => {}} onSignUpSuccessful={() => {}} />
-      )}
-      {false && (
-        <LogInModal onDismiss={() => {}} onLogInSuccessful={() => {}} />
-      )}
-    </Container>
-    //showAddEditNoteDialog && needed so at each opening time it is wiped and previous input is not still loaded on the screen
+        >
+          Add New Note
+          <FaPlus />
+        </Button>
+        {notesLoading && <Spinner animation="border" variant="primary" />}
+        {notesLoadingError && (
+          <p>Something went wrong. Please refresh the page.</p>
+        )}
+        {!notesLoading && !notesLoadingError && (
+          <>
+            {notes.length > 0 ? (
+              notesGrid
+            ) : (
+              <p>You do not have any notes yet</p>
+            )}
+          </>
+        )}
+        {showAddNoteDialog && (
+          <AddEditNoteDialog
+            onDismiss={() => {
+              setShowAddNoteDialog(false);
+            }}
+            onNoteSaved={(newNote) => {
+              setNotes([...notes, newNote]);
+              setShowAddNoteDialog(false);
+            }}
+          />
+        )}
+        {noteToEdit && (
+          <AddEditNoteDialog
+            noteToEdit={noteToEdit}
+            onDismiss={() => {
+              setNoteToEdit(null);
+            }}
+            onNoteSaved={(updatedNote) => {
+              setNotes(
+                notes.map((existingNote) =>
+                  existingNote._id === updatedNote._id
+                    ? updatedNote
+                    : existingNote
+                )
+              );
+              setNoteToEdit(null);
+            }}
+          />
+        )}
+        {false && (
+          <SignUpModal onDismiss={() => {}} onSignUpSuccessful={() => {}} />
+        )}
+        {false && (
+          <LogInModal onDismiss={() => {}} onLogInSuccessful={() => {}} />
+        )}
+      </Container>
+    </div>
   );
 }
 
