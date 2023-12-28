@@ -85,7 +85,7 @@ export const login: RequestHandler<
 
   try {
     if (!username || !password) {
-      throw createHttpError(400, "One or more parameters missing");
+      throw createHttpError(400, "One Or More Parameters Missing");
     }
 
     const user = await UserModel.findOne({ username: username })
