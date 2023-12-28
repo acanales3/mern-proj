@@ -9,6 +9,7 @@ import { Container } from "react-bootstrap";
 import NotesPage from "./pages/NotesPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import NoteFoundPage from "./pages/NotFoundPage";
+import styles from "./styles/App.module.css";
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
@@ -37,7 +38,7 @@ function App() {
           onSignUpClicked={() => setShowSignUpModal(true)}
           onLogOutSuccessful={() => setLoggedInUser(null)}
         />
-        <Container>
+        <Container className={styles.pageContainer}>
           <Routes>
             <Route
               path="/"
