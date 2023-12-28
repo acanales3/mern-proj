@@ -41,7 +41,7 @@ export const signUp: RequestHandler<
     if (exisitingUsername) {
       throw createHttpError(
         409,
-        "Username already taken. Please choose a different username, or log in instead"
+        "Username already taken. Please choose a different username, or log in instead."
       );
     }
 
@@ -93,12 +93,12 @@ export const login: RequestHandler<
       .exec();
 
     if (!user) {
-      throw createHttpError(401, "Invalid log in credentials");
+      throw createHttpError(401, "Invalid Log In Credentials");
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
-      throw createHttpError(401, "Invalid log in credentials");
+      throw createHttpError(401, "Invalid Log In Credentials");
     }
 
     req.session.userId = user._id;
