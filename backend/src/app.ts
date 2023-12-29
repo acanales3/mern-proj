@@ -8,10 +8,19 @@ import session from "express-session";
 import env from "./util/validateEnv";
 import MongoStore from "connect-mongo";
 import { requiresAuth } from "./middleware/auth";
+import cors from "cors";
 
 const app = express();
 
 app.use(morgan("dev"));
+
+app.use(
+  cors({
+    origin: [""],
+    methods: ["POST", "GET", "DELETE", "PATCH"],
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 
