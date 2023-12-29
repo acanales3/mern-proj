@@ -16,3 +16,4 @@ Features:
 - Privacy Policy Page
 - Time stamp for created and edited
 - Other features to be added soon
+- Loading states for data fetching
